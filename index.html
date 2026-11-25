@@ -36,10 +36,6 @@ body { font-family: 'Noto Sans KR', sans-serif; background-color: #f8fafc; }
 </style>
 </head>
 <body class="bg-warmBg text-slate-800 font-sans antialiased h-screen flex flex-col overflow-hidden">
-<!-- Chosen Palette: Premium Trust Blue & Warm Neutrals -->
-<!-- Application Structure Plan: Integrated Single Page Application (SPA) designed to combine high-conversion service effect reporting with a seamless customer reservation intake form (CRM) and an administrative control panel. Navigating between views is controlled dynamically via JavaScript to ensure 100% functionality inside iframe/preview environments, optimizing the user flow from initial exploration to booking. -->
-<!-- Visualization & Content Choices: Ad Copy/Metrics -> Goal: Illustrate Cleanliness & Trust Improvement -> Method: Dynamic Comparative Bar Chart (Chart.js) -> Interaction: Interactive tab selectors (Home, Shop, Office) update the data coordinates on click -> Justification: Highlighting contrast in environment indicators before/after care -> Library: Chart.js (Strictly Canvas-rendered, no SVG). -->
-<!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 
 <header class="bg-gradient-to-r from-brandBlue to-blue-900 text-white p-4 sm:p-5 shadow-xl flex-shrink-0 z-50 border-b border-blue-800">
 <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
@@ -72,6 +68,7 @@ Premium Total Solution
 <main class="flex-1 relative overflow-y-auto">
 <div class="max-w-7xl mx-auto w-full h-full">
 
+<!-- 1. 서비스 기대 효과 리포트 -->
 <section id="view-report" class="block w-full py-8 px-4 sm:px-6 lg:px-8 fade-in">
 <header class="text-center mb-10">
 <div class="inline-block bg-brandBlue text-white text-3xl p-4 rounded-full mb-4 shadow-lg">🌿</div>
@@ -124,6 +121,7 @@ Premium Total Solution
 </div>
 </section>
 
+<!-- 2. 고객 접수 화면 -->
 <section id="view-crm" class="hidden w-full py-8 px-4 sm:px-6 flex justify-center items-start fade-in">
 <div class="glass-card w-full max-w-xl rounded-3xl shadow-[0_10px_40px_rgba(0,0,0,0.08)] p-6 sm:p-8 border border-white">
 <div class="text-center mb-8">
@@ -138,11 +136,11 @@ Premium Total Solution
 <div class="grid grid-cols-2 gap-4">
 <div class="space-y-1.5">
 <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest pl-1">성함</label>
-<input type="text" required class="w-full p-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:border-brandGreen focus:ring-2 focus:ring-green-100 outline-none transition-all" placeholder="홍길동">
+<input type="text" id="custName" required class="w-full p-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:border-brandGreen focus:ring-2 focus:ring-green-100 outline-none transition-all" placeholder="홍길동">
 </div>
 <div class="space-y-1.5">
 <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest pl-1">연락처</label>
-<input type="tel" required placeholder="010-0000-0000" class="w-full p-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:border-brandGreen focus:ring-2 focus:ring-green-100 outline-none transition-all">
+<input type="tel" id="custPhone" required placeholder="010-0000-0000" class="w-full p-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:border-brandGreen focus:ring-2 focus:ring-green-100 outline-none transition-all">
 </div>
 </div>
 
@@ -172,11 +170,11 @@ Premium Total Solution
 
 <div class="space-y-1.5">
 <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest pl-1">주소</label>
-<input type="text" required placeholder="서비스를 받으실 정확한 주소를 입력해주세요" class="w-full p-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:border-brandGreen focus:ring-2 focus:ring-green-100 outline-none transition-all">
+<input type="text" id="custAddress" required placeholder="서비스를 받으실 정확한 주소를 입력해주세요" class="w-full p-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:border-brandGreen focus:ring-2 focus:ring-green-100 outline-none transition-all">
 </div>
 <div class="space-y-1.5">
 <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest pl-1">요청 사항</label>
-<textarea rows="3" required placeholder="필요하신 케어 분야를 상세히 적어주세요" class="w-full p-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:border-brandGreen focus:ring-2 focus:ring-green-100 outline-none resize-none transition-all"></textarea>
+<textarea rows="3" id="custRequest" required placeholder="필요하신 케어 분야를 상세히 적어주세요" class="w-full p-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:border-brandGreen focus:ring-2 focus:ring-green-100 outline-none resize-none transition-all"></textarea>
 </div>
 <div class="space-y-1.5">
 <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest pl-1">희망 날짜</label>
@@ -184,7 +182,7 @@ Premium Total Solution
 </div>
 
 <div class="pt-6">
-<button type="submit" class="w-full bg-brandBlue hover:bg-blue-800 text-white font-black py-4 rounded-2xl shadow-xl shadow-blue-200 transition-all transform active:scale-95 text-xl tracking-[0.2em]">
+<button type="submit" id="submitBtn" class="w-full bg-brandBlue hover:bg-blue-800 text-white font-black py-4 rounded-2xl shadow-xl shadow-blue-200 transition-all transform active:scale-95 text-xl tracking-[0.2em]">
 접수 완료하기
 </button>
 
@@ -200,6 +198,7 @@ Premium Total Solution
 </div>
 </section>
 
+<!-- 3. 관리자 대시보드 (구글 시트 실시간 연동) -->
 <section id="view-admin" class="hidden w-full h-full flex flex-col p-4 sm:p-8 bg-slate-100 fade-in">
 <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-6 gap-4">
 <div>
@@ -207,62 +206,47 @@ Premium Total Solution
 <span class="w-2 h-8 bg-brandGreen rounded-full"></span>
 <h2 class="text-3xl font-black text-slate-800 tracking-tight">접수 관리 현황</h2>
 </div>
-<p class="text-slate-500 text-sm font-medium pl-5">통합 관리 대시보드</p>
+<p class="text-slate-500 text-sm font-medium pl-5">구글 스프레드시트 실시간 동기화 대시보드</p>
 </div>
 <div class="flex flex-col items-end gap-3">
+<div class="flex gap-2">
+<button onclick="fetchCustomerData()" class="text-xs font-bold bg-brandBlue text-white hover:bg-blue-800 px-3 py-1.5 rounded-lg shadow-sm transition-all flex items-center gap-1.5">
+<i class="fa-solid fa-rotate"></i> 새로고침
+</button>
 <button onclick="openChangePwdModal()" class="text-xs font-bold bg-white text-slate-600 hover:text-brandBlue hover:bg-blue-50 border border-slate-200 px-3 py-1.5 rounded-lg shadow-sm transition-all flex items-center gap-1">
 <i class="fa-solid fa-key"></i> 비밀번호 변경
 </button>
+</div>
 <div class="flex gap-4">
 <div class="bg-white p-3 px-5 rounded-2xl shadow-sm border border-slate-200 text-center min-w-[110px]">
 <p class="text-[10px] font-bold text-slate-400 mb-1">전체 접수건</p>
-<p class="text-2xl font-black text-brandBlue">12</p>
+<p id="stat-total" class="text-2xl font-black text-brandBlue">0</p>
 </div>
 <div class="bg-white p-3 px-5 rounded-2xl shadow-sm border border-slate-200 text-center min-w-[110px]">
 <p class="text-[10px] font-bold text-slate-400 mb-1">오늘 신규</p>
-<p class="text-2xl font-black text-brandGreen">3</p>
+<p id="stat-today" class="text-2xl font-black text-brandGreen">0</p>
 </div>
 </div>
 </div>
 </div>
 
 <div class="bg-white rounded-3xl shadow-sm border border-slate-200 flex-1 overflow-hidden flex flex-col">
-<div class="overflow-x-auto">
-<table class="w-full text-left border-collapse min-w-[600px]">
-<thead class="bg-slate-50 text-slate-500 text-[11px] font-black uppercase tracking-wider sticky top-0 border-b border-slate-100">
+<div class="overflow-x-auto flex-1">
+<table class="w-full text-left border-collapse min-w-[650px]">
+<thead class="bg-slate-50 text-slate-500 text-[11px] font-black uppercase tracking-wider sticky top-0 border-b border-slate-100 z-10">
 <tr>
-<th class="p-5">접수일</th>
+<th class="p-5">접수일시</th>
 <th class="p-5">고객명</th>
 <th class="p-5">연락처</th>
 <th class="p-5">공간 유형</th>
+<th class="p-5">희망날짜</th>
 <th class="p-5">상태</th>
-<th class="p-5 text-center">관리</th>
+<th class="p-5 text-center">상세보기</th>
 </tr>
 </thead>
-<tbody class="divide-y divide-slate-100">
-<tr class="hover:bg-blue-50/40 transition-colors">
-<td class="p-5 text-sm text-slate-400 font-mono">05.05</td>
-<td class="p-5 font-bold text-slate-800">홍길동</td>
-<td class="p-5 text-sm text-slate-600 font-medium">010-1234-5678</td>
-<td class="p-5 text-sm font-bold text-brandBlue">사무실</td>
-<td class="p-5">
-<span class="px-3 py-1 bg-yellow-100 text-yellow-800 text-[10px] font-black rounded-full border border-yellow-200">상담대기</span>
-</td>
-<td class="p-5 text-center">
-<button class="bg-slate-800 text-white text-[10px] font-bold px-4 py-1.5 rounded-lg hover:bg-black transition-all shadow-sm">상세보기</button>
-</td>
-</tr>
-<tr class="hover:bg-blue-50/40 transition-colors">
-<td class="p-5 text-sm text-slate-400 font-mono">05.04</td>
-<td class="p-5 font-bold text-slate-800">김연우</td>
-<td class="p-5 text-sm text-slate-600 font-medium">010-8888-9999</td>
-<td class="p-5 text-sm font-bold text-brandBlue">우리 집</td>
-<td class="p-5">
-<span class="px-3 py-1 bg-green-100 text-green-800 text-[10px] font-black rounded-full border border-green-200">확정완료</span>
-</td>
-<td class="p-5 text-center">
-<button class="bg-slate-800 text-white text-[10px] font-bold px-4 py-1.5 rounded-lg hover:bg-black transition-all shadow-sm">상세보기</button>
-</td>
+<tbody id="adminTableBody" class="divide-y divide-slate-100">
+<tr>
+<td colspan="7" class="p-10 text-center text-slate-400 font-medium">데이터를 불러오는 중입니다...</td>
 </tr>
 </tbody>
 </table>
@@ -273,12 +257,14 @@ Premium Total Solution
 </div>
 </main>
 
-<a href="https://open.kakao.com/o/sp6beQvi" target="_blank" 
+<!-- 카카오톡 상담 플로팅 버튼 -->
+<a href="https://open.kakao.com/" target="_blank" 
 class="fixed bottom-8 right-6 w-16 h-16 bg-[#FEE500] text-[#371D1E] rounded-full shadow-2xl flex flex-col items-center justify-center border-4 border-white hover:scale-110 transition-all z-[60]">
 <i class="fa-solid fa-comment text-2xl"></i>
 <span class="text-[10px] font-black mt-0.5">상담톡</span>
 </a>
 
+<!-- 관리자 인증 모달 -->
 <div id="authModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[100] hidden items-center justify-center p-4">
 <div class="bg-white rounded-3xl shadow-2xl w-full max-w-sm overflow-hidden transform transition-all scale-95 animate-modal">
 <div class="bg-brandBlue p-8 text-center text-white">
@@ -300,6 +286,53 @@ class="w-full text-center text-3xl tracking-[0.6em] p-4 bg-gray-50 border-2 bord
 </div>
 </div>
 
+<!-- 고객 상세 정보 및 상태 변경 모달 -->
+<div id="detailModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[100] hidden items-center justify-center p-4">
+<div class="bg-white rounded-3xl shadow-2xl w-full max-w-md overflow-hidden">
+<div class="bg-slate-800 p-6 text-white flex justify-between items-center">
+<h3 class="text-xl font-black tracking-tight">접수 상세 내역</h3>
+<button onclick="closeDetailModal()" class="text-slate-400 hover:text-white text-xl"><i class="fa-solid fa-xmark"></i></button>
+</div>
+<div class="p-6 space-y-4 text-sm">
+<div class="grid grid-cols-2 gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-100">
+<div>
+<p class="text-xs text-slate-400 font-bold">고객명</p>
+<p id="det-name" class="font-black text-slate-800 text-base mt-0.5">-</p>
+</div>
+<div>
+<p class="text-xs text-slate-400 font-bold">연락처</p>
+<p id="det-phone" class="font-bold text-brandBlue text-base mt-0.5">-</p>
+</div>
+<div>
+<p class="text-xs text-slate-400 font-bold">공간 유형</p>
+<p id="det-space" class="font-bold text-slate-700 mt-0.5">-</p>
+</div>
+<div>
+<p class="text-xs text-slate-400 font-bold">희망 날짜</p>
+<p id="det-hopeDate" class="font-bold text-slate-700 mt-0.5">-</p>
+</div>
+</div>
+<div>
+<p class="text-xs text-slate-400 font-bold mb-1">방문 주소</p>
+<p id="det-address" class="p-3 bg-slate-50 rounded-xl border border-slate-100 font-medium text-slate-700">-</p>
+</div>
+<div>
+<p class="text-xs text-slate-400 font-bold mb-1">요청 사항</p>
+<p id="det-request" class="p-3 bg-slate-50 rounded-xl border border-slate-100 font-medium text-slate-700 whitespace-pre-wrap min-h-[70px]">-</p>
+</div>
+<div class="pt-2 border-t border-slate-100">
+<p class="text-xs text-slate-400 font-bold mb-2">진행 상태 변경 (구글 시트 즉시 반영)</p>
+<div class="flex gap-2">
+<button onclick="changeBookingStatus('상담대기')" class="flex-1 py-2.5 rounded-xl font-bold text-xs bg-yellow-100 text-yellow-800 hover:bg-yellow-200 transition">상담대기</button>
+<button onclick="changeBookingStatus('확정완료')" class="flex-1 py-2.5 rounded-xl font-bold text-xs bg-green-100 text-green-800 hover:bg-green-200 transition">확정완료</button>
+<button onclick="changeBookingStatus('작업완료')" class="flex-1 py-2.5 rounded-xl font-bold text-xs bg-blue-100 text-blue-800 hover:bg-blue-200 transition">작업완료</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- 비밀번호 변경 모달 -->
 <div id="changePwdModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[100] hidden items-center justify-center p-4">
 <div class="bg-white rounded-3xl shadow-2xl w-full max-w-sm overflow-hidden transform transition-all scale-95 animate-modal">
 <div class="bg-slate-800 p-6 text-center text-white">
@@ -327,12 +360,18 @@ class="w-full text-center text-3xl tracking-[0.6em] p-4 bg-gray-50 border-2 bord
 </div>
 </div>
 
+<!-- 알림창 (Toast) -->
 <div id="toast" class="fixed bottom-10 left-1/2 -translate-x-1/2 bg-slate-800 text-white px-8 py-4 rounded-full text-sm font-bold shadow-2xl opacity-0 transition-all z-[200] pointer-events-none border border-slate-700 flex items-center gap-2">
 <i class="fa-solid fa-circle-check text-brandGreen"></i>
 <span id="toast-text">안내 메시지입니다.</span>
 </div>
 
 <script>
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx425SB5CwxXu_mgH7C4xSVvmfF1NEO3lk3yCfoluMSWzxASMkLhcf2W4KLGNAuAA5H-g/exec";
+
+let cachedCustomers = [];
+let selectedRowIndex = null;
+
 const reportData = {
 home: {
 title: "우리 집 안심 공기",
@@ -378,6 +417,9 @@ this.currentView = viewId;
 
 if (viewId === 'report' && this.chartInstance) {
 this.chartInstance.resize();
+}
+if (viewId === 'admin') {
+fetchCustomerData();
 }
 
 window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -441,6 +483,132 @@ this.chartInstance.update();
 }
 };
 
+// 고객 접수 데이터 구글 시트 전송
+document.getElementById('applyForm').addEventListener('submit', async (e) => {
+e.preventDefault();
+
+const submitBtn = document.getElementById('submitBtn');
+const originalText = submitBtn.innerText;
+submitBtn.disabled = true;
+submitBtn.innerText = "접수 전송 중...";
+
+const payload = {
+name: document.getElementById('custName').value,
+phone: document.getElementById('custPhone').value,
+spaceType: document.querySelector('input[name="spaceType"]:checked').value,
+address: document.getElementById('custAddress').value,
+request: document.getElementById('custRequest').value,
+hopeDate: document.getElementById('hopeDate').value
+};
+
+try {
+await fetch(GOOGLE_SCRIPT_URL, {
+method: 'POST',
+body: JSON.stringify(payload)
+});
+showToast("정상적으로 접수되었습니다. 카톡 상담을 진행해 주세요!");
+e.target.reset();
+document.getElementById('hopeDate').valueAsDate = new Date();
+} catch (err) {
+console.error(err);
+alert("전송 중 오류가 발생했습니다. 네트워크 상태를 확인 후 다시 시도해 주세요.");
+} finally {
+submitBtn.disabled = false;
+submitBtn.innerText = originalText;
+}
+});
+
+// 관리자 화면: 구글 시트에서 전체 고객 목록 불러오기
+async function fetchCustomerData() {
+const tbody = document.getElementById('adminTableBody');
+tbody.innerHTML = '<tr><td colspan="7" class="p-10 text-center text-slate-400 font-medium"><i class="fa-solid fa-spinner fa-spin mr-2"></i>실시간 데이터를 불러오는 중입니다...</td></tr>';
+
+try {
+const res = await fetch(GOOGLE_SCRIPT_URL);
+const data = await res.json();
+cachedCustomers = data;
+
+document.getElementById('stat-total').innerText = data.length;
+const todayStr = new Date().toISOString().slice(0, 10);
+const todayCount = data.filter(item => String(item.timestamp).startsWith(todayStr)).length;
+document.getElementById('stat-today').innerText = todayCount;
+
+if (data.length === 0) {
+tbody.innerHTML = '<tr><td colspan="7" class="p-10 text-center text-slate-400 font-medium">아직 접수된 내역이 없습니다.</td></tr>';
+return;
+}
+
+tbody.innerHTML = data.map((item, idx) => {
+let badgeClass = "bg-yellow-100 text-yellow-800 border-yellow-200";
+if (item.status === '확정완료') badgeClass = "bg-green-100 text-green-800 border-green-200";
+if (item.status === '작업완료') badgeClass = "bg-blue-100 text-blue-800 border-blue-200";
+
+const formattedHopeDate = String(item.hopeDate).slice(0, 10);
+
+return `
+<tr class="hover:bg-blue-50/40 transition-colors">
+<td class="p-5 text-xs text-slate-500 font-mono">${item.timestamp}</td>
+<td class="p-5 font-bold text-slate-800">${item.name}</td>
+<td class="p-5 text-sm text-slate-600 font-medium">${item.phone}</td>
+<td class="p-5 text-sm font-bold text-brandBlue">${item.spaceType}</td>
+<td class="p-5 text-xs text-slate-600 font-mono">${formattedHopeDate}</td>
+<td class="p-5">
+<span class="px-3 py-1 text-[10px] font-black rounded-full border ${badgeClass}">${item.status}</span>
+</td>
+<td class="p-5 text-center">
+<button onclick="openDetailModal(${idx})" class="bg-slate-800 text-white text-[10px] font-bold px-4 py-1.5 rounded-lg hover:bg-black transition-all shadow-sm">상세보기</button>
+</td>
+</tr>
+`;
+}).join('');
+
+} catch (err) {
+console.error(err);
+tbody.innerHTML = '<tr><td colspan="7" class="p-10 text-center text-red-500 font-medium">데이터를 불러오지 못했습니다. 새로고침을 눌러주세요.</td></tr>';
+}
+}
+
+function openDetailModal(idx) {
+const item = cachedCustomers[idx];
+if (!item) return;
+
+selectedRowIndex = item.rowIndex;
+document.getElementById('det-name').innerText = item.name;
+document.getElementById('det-phone').innerText = item.phone;
+document.getElementById('det-space').innerText = item.spaceType;
+document.getElementById('det-hopeDate').innerText = String(item.hopeDate).slice(0, 10);
+document.getElementById('det-address').innerText = item.address;
+document.getElementById('det-request').innerText = item.request;
+
+document.getElementById('detailModal').classList.add('modal-active');
+}
+
+function closeDetailModal() {
+document.getElementById('detailModal').classList.remove('modal-active');
+selectedRowIndex = null;
+}
+
+async function changeBookingStatus(newStatus) {
+if (!selectedRowIndex) return;
+showToast("상태를 변경하는 중입니다...");
+
+try {
+await fetch(GOOGLE_SCRIPT_URL, {
+method: 'POST',
+body: JSON.stringify({
+action: 'updateStatus',
+rowIndex: selectedRowIndex,
+status: newStatus
+})
+});
+closeDetailModal();
+showToast(`상태가 '${newStatus}'(으)로 변경되었습니다.`);
+fetchCustomerData();
+} catch (err) {
+alert("상태 변경 중 오류가 발생했습니다.");
+}
+}
+
 let currentAdminPwd = localStorage.getItem('adminPwd') || "1234";
 
 function openAuthModal() {
@@ -499,13 +667,6 @@ document.getElementById('toast-text').innerText = msg;
 toast.classList.add('opacity-100', '-translate-y-5');
 setTimeout(() => { toast.classList.remove('opacity-100', '-translate-y-5'); }, 3000);
 }
-
-document.getElementById('applyForm').addEventListener('submit', (e) => {
-e.preventDefault();
-showToast("정상적으로 접수되었습니다. 카톡 상담을 진행해 주세요!");
-e.target.reset();
-document.getElementById('hopeDate').valueAsDate = new Date();
-});
 
 document.getElementById('adminPassword').addEventListener('keypress', (e) => {
 if (e.key === 'Enter') checkAuth();
